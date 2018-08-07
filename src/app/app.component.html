@@ -1,4 +1,4 @@
-<!-- BEGIN PAGE MODALS -->
+<!-- BEGIN Create MODAL  -->
 <div bsModal #smModal="bs-modal" class="modal fade portlet box green indexLow" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-sm">
@@ -59,6 +59,9 @@
     </div>
   </div>
 </div>
+<!-- End Create MODAL  -->
+
+<!-- BEGIN Edit MODAL  -->
 <div bsModal #editModal="bs-modal" class="modal fade portlet box green indexLow" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-sm">
@@ -70,7 +73,7 @@
 
       </div>
       <div class="modal-footer" style="padding: 8px;" *ngIf="editItemForm">
-        <form class="form form-horizontal" [formGroup]="editItemForm" (ngSubmit)="editItem(editItemForm.value,editModal,editItemForm.valid,succModal)"
+        <form class="form form-horizontal" [formGroup]="editItemForm" (ngSubmit)="editItem(editItemForm,editItemForm.value,editModal,editItemForm.valid,succModal)"
           novalidate>
           <div class="form-group">
             <label for="ItemName" class="right">الاسم
@@ -119,6 +122,8 @@
     </div>
   </div>
 </div>
+<!-- End Edit MODAL  -->
+
 
 <!-- delete modal -->
 <div bsModal #dangerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -138,14 +143,11 @@
         <button type="button" class="btn btn-primary" style="margin-bottom:0" (click)="deleteItem(dangerModal,deletedItem,deletedItemIndex)">نعم</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 <!-- end delete modal -->
 
-
+<!-- BEGIN Success MODAL  -->
 <div bsModal #succModal="bs-modal" class="modal fade portlet box" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-md">
@@ -159,7 +161,9 @@
     </div>
   </div>
 </div>
+<!-- End Success MODAL  -->
 
+<!-- BEGIN DataTable   -->
 <div class="container">
   <div class="row" *ngIf="items && items.data">
     <div class="col-lg-12">
@@ -199,3 +203,4 @@
     </div>
   </div>
 </div>
+<!-- End DataTable   -->

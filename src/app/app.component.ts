@@ -150,7 +150,7 @@ export class AppComponent implements OnInit {
     }
     return;
   }
-  async editItem(form, modal, valid, succModal) {
+  async editItem(form, body, modal, valid, succModal) {
     if (!valid) {
       let name_error = form.controls.ItemName.errors;
       let price_error = form.controls.Price.errors;
@@ -175,13 +175,13 @@ export class AppComponent implements OnInit {
         };
       return;
     }
-    let result = await this.apiService.updateItem(`/Items/${form.ItemId}`, form).toPromise();
+    let result = await this.apiService.updateItem(`/Items/${body.ItemId}`, body).toPromise();
     if (result.status == 204) {
       modal.hide();
       this.head = "تعديل منتج "
       this.body = "تم تعديل منتج بنجاح "
-      var i = this.items.data.findIndex(o => o.ItemId === form.ItemId);
-      this.items.data[i] = form
+      var i = this.items.data.findIndex(o => o.ItemId === body.ItemId);
+      this.items.data[i] = body
       succModal.show();
     }
     return;
