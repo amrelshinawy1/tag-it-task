@@ -1,20 +1,201 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- BEGIN PAGE MODALS -->
+<div bsModal #smModal="bs-modal" class="modal fade portlet box green indexLow" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header portlet-title">
+        <h4 class="modal-title pull-left right">اضافه منتج جديد</h4>
+      </div>
+      <div class="modal-body portlet-body">
 
+      </div>
+      <div class="modal-footer" style="padding: 8px;">
+        <form class="form form-horizontal" [formGroup]="createItem" (ngSubmit)="create(createItem,createItem.value,smModal,createItem.valid,succModal)"
+          novalidate>
+          <div class="form-group">
+            <label for="ItemName" class="right">الاسم
+              <span class="required">*</span>
+            </label>
+            <input type="text" id="ItemName" formControlName="ItemName" class="form-control" placeholder="ادخل الاسم">
+            <div *ngIf="error?.ItemName.length >0">
+              <span class="alert right required " *ngFor="let msg of error.ItemName">{{msg}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Price" class="right">السعر
+              <span class="required ">*</span>
+            </label>
+            <input type="text" id="Price" formControlName="Price" class="form-control" placeholder="ادخل السعر">
+            <div *ngIf="error?.Price.length >0">
+              <span class="alert right required " *ngFor="let msg of error.Price">{{msg}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Photo" class="right">صوره المنتج
+              <span class="required ">*</span>
+            </label>
+            <input type="text" id="Photo" formControlName="Photo" class="form-control" placeholder="ادخل رابط الصوره المنتج ">
+            <div *ngIf="error?.Photo.length >0">
+              <span class="alert right required " *ngFor="let msg of error.Photo">{{msg}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ExpireDate" class="right">انتهاء الصلاحيه
+              <span class="required ">*</span>
+            </label>
+            <input type="text" id="ExpireDate" name="ExpireDate" formControlName="ExpireDate" class="form-control" placeholder="ادخل تاريخ انتهاء الصلاحيه ">
+            <div *ngIf="error?.ExpireDate.length >0">
+              <span class="alert right required" *ngFor="let msg of error.ExpireDate">{{msg}}</span>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="buttons-row">
+            <button type="submit" class="btn btn-lg pull-right" style="background-color:#17C4BB; color:white;">
+              <i class="fa fa-dot-circle-o"></i> اضافه</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #editModal="bs-modal" class="modal fade portlet box green indexLow" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header portlet-title">
+        <h4 class="modal-title pull-left right">تعديل منتج</h4>
+      </div>
+      <div class="modal-body portlet-body">
+
+      </div>
+      <div class="modal-footer" style="padding: 8px;" *ngIf="editItemForm">
+        <form class="form form-horizontal" [formGroup]="editItemForm" (ngSubmit)="editItem(editItemForm.value,editModal,editItemForm.valid,succModal)"
+          novalidate>
+          <div class="form-group">
+            <label for="ItemName" class="right">الاسم
+              <span class="required">*</span>
+            </label>
+            <input type="text" id="ItemName" formControlName="ItemName" class="form-control" placeholder="ادخل الاسم">
+            <div *ngIf="error?.ItemName.length >0">
+              <span class="alert right required " *ngFor="let msg of error.ItemName">{{msg}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Price" class="right">السعر
+              <span class="required ">*</span>
+            </label>
+            <input type="text" id="Price" formControlName="Price" class="form-control" placeholder="ادخل السعر">
+            <div *ngIf="error?.Price.length >0">
+              <span class="alert right required " *ngFor="let msg of error.Price">{{msg}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Photo" class="right">صوره المنتج
+              <span class="required ">*</span>
+            </label>
+            <input type="text" id="Photo" formControlName="Photo" class="form-control" placeholder="ادخل رابط الصوره المنتج ">
+            <div *ngIf="error?.Photo.length >0">
+              <span class="alert right required " *ngFor="let msg of error.Photo">{{msg}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ExpireDate" class="right">انتهاء الصلاحيه
+              <span class="required ">*</span>
+            </label>
+            <input type="text" id="ExpireDate" name="ExpireDate" formControlName="ExpireDate" class="form-control" placeholder="ادخل تاريخ انتهاء الصلاحيه ">
+            <div *ngIf="error?.ExpireDate.length >0">
+              <span class="alert right required" *ngFor="let msg of error.ExpireDate">{{msg}}</span>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="buttons-row">
+            <button type="submit" class="btn btn-lg pull-right" style="background-color:#17C4BB; color:white;">
+              <i class="fa fa-dot-circle-o"></i> تعديل</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- delete modal -->
+<div bsModal #dangerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-danger" role="document">
+    <div class="modal-content">
+      <div class="modal-header danger">
+        <h4 class="modal-title">حذف منتج</h4>
+        <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>هل انت متاكد من حذف المنتج ؟ </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">لا</button>
+        <button type="button" class="btn btn-primary" style="margin-bottom:0" (click)="deleteItem(dangerModal,deletedItem,deletedItemIndex)">نعم</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- end delete modal -->
+
+
+<div bsModal #succModal="bs-modal" class="modal fade portlet box" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header succHead portlet-title">
+        <h4 class="modal-title pull-left">{{head}}</h4>
+      </div>
+      <div class="modal-body portlet-body gray">
+        <p>{{body}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row" *ngIf="items && items.data">
+    <div class="col-lg-12">
+      <button type="button" (click)="smModal.show()" class="btn btn-info">اضافه</button>
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table border table-responsive" id="datatable" #datatable>
+        <thead>
+          <tr>
+            <th>خيارات</th>
+            <th>انتهاء الصلاحيه</th>
+            <th>صوره المنتج</th>
+            <th>السعر</th>
+            <th>الاسم</th>
+            <th>م</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items.data let i = index;">
+            <td>
+              <button type="button" (click)="ShowEditModal(editModal,item)" class="btn btn-info">
+                <i class="material-icons">mode_edit</i>
+              </button>
+              <button type="button" (click)="ShowDeleteModal(dangerModal,item,i)" class="btn btn-info">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+            <td>{{item.ExpireDate |date:"short" }} </td>
+
+            <td>
+              <img style="width: 50px; height: 50px;" src={{item.Photo}}>
+            </td>
+            <td>{{item.Price}}</td>
+            <td>{{item.ItemName}}</td>
+            <td>{{item.ItemId}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

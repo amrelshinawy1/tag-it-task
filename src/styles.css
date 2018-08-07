@@ -1,1 +1,289 @@
-/* You can add global styles to this file, and also import other style files */
+You can add global styles to this file, and also import other style files
+
+body,
+html {
+  height: 100%;
+}
+
+.ng-busy-default-sign {
+  position: fixed !important;
+  border-top: -1px;
+}
+
+.page-container,
+.page-content-wrapper,
+.page-content {
+  height: 100%;
+  
+}
+
+.page-content {
+  padding: 0;
+}
+
+.portlet.light .portlet-body {
+  padding-top: 8px;
+  height: 400px;
+  overflow-x: hidden;
+}
+
+.modal-open .modal {
+  background-color: rgba(0, 0, 0, .4)
+}
+
+.page-header.navbar.navbar-fixed-top,
+.page-header.navbar.navbar-static-top {
+  z-index: 555;
+}
+
+.portlet.box>.portlet-body {
+  height: 400px;
+  overflow: auto;
+  /* overflow-x: hidden; */
+}
+
+.modal .modal-header .close {
+  display: none;
+}
+
+.modal .modal-header {
+  border-bottom: none;
+  display: block;
+  background-color: #32c5d2;
+}
+
+.list-group>li {
+  font-size: 16px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: normal;
+  color: white;
+}
+
+.modal {
+  height: 100%;
+}
+
+.modal.fade .modal-dialog {
+  top: 10%;
+}
+
+.gray {
+  color: #6b6b6b;
+  font-size: 16px;
+}
+
+.modal .modal-header {
+  color: black;
+}
+
+.modal-open .modal {
+  background-color: rgba(0, 0, 0, .4)
+}
+
+.form-group {
+  font-size: 16px;
+}
+
+.form-group input {
+  font-size: 16px;
+}
+
+.form-group select {
+  font-size: 16px;
+  height: 30%;
+}
+
+.modal .modal-header .close {
+  display: none;
+}
+
+.modal-content {
+  border: none;
+  box-shadow: 0 1px 5px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.modal-content .btn {
+  font-size: 16px;
+}
+
+.modal-body {}
+
+.modal-body strong {
+  font-weight: 600;
+}
+
+.list-group-item {}
+
+.modal-footer {
+  display: block;
+  padding: 0 15px 15px !important;
+  text-align: left;
+  border-top: none;
+}
+
+div.modal-footer form {
+  margin-bottom: 0;
+  padding: 0 1.25rem !important;
+  width: 100%;
+}
+
+div.modal-footer form.pull-left .form-group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(211, 211, 211, 0.53)
+}
+
+div.modal-footer form.form.form-group input {
+  box-shadow: 0 1px 5px 0 hsla(118, 85%, 37%, 0.07) !important;
+  width: 50%;
+}
+
+div.modal-footer form.form.form-group label {
+  font-weight: 500 !important;
+  float: left !important;
+  margin-right: 15px !important;
+}
+
+.danger {
+  background-color: #e7505a !important;
+}
+
+.success {
+  background-color: #1BBC9B !important;
+  font-size: 18px !important;
+}
+
+.alert p {
+  font-size: 14px;
+}
+
+.form-container span.help-block {
+  position: absolute;
+  
+}
+
+input:-webkit-autofill {
+  background-color: white !important;
+}
+
+.dt-button {
+  color: #20a8d8 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: #20a8d8 !important;
+  transition-duration: 300ms !important;
+}
+
+.dt-button:hover {
+  color: white !important;
+  background-color: #20a8d8 !important;
+  background-image: none !important;
+  border-color: #20a8d8 !important;
+}
+
+.dataTables_info {
+  color: #a4b1c5 !important;
+  margin-top: 13px
+}
+
+.dataTables_paginate {
+  padding: 0;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.card-block .dt-buttons,
+.card-block .dataTables_filter,
+.card-block .dataTables_info,
+.card-block .dataTables_paginate {
+  padding: 15px;
+}
+
+a.paginate_button {
+  line-height: 1.25 !important;
+  border: 1px solid #20ec39  !important;
+}
+
+.dataTables_filter input[type="search"],
+.dataTables_length select {
+  padding: 0.2rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: black ;
+  background-color: #fff;
+  border: 1px solid #20ec39  ;
+  border-radius: 0;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.dataTables_filter label,
+.dataTables_length label {
+  margin-bottom: 20px;
+  color: gray;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button {
+  color: black !important;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.disabled {
+  color: green !important;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button:hover,
+.dataTables_wrapper .dataTables_paginate a.paginate_button.disabled:hover {
+  color: white !important;
+  background: #075a10 !important;
+  border-color: #20ec39 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.current {
+  color: black !important;
+  background: white !important;
+  border-color:  #20ec39 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.current:hover {
+  color: white !important;
+  background: #075a10 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.previous {
+  border-left: 1px solid #20ec39 !important;
+  border-radius: 4px 0 0 4px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.next {
+  border-radius: 0 4px 4px 0 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+  background: none !important;
+  box-shadow: none !important
+}
+
+.dataTables_wrapper .dt-buttons {
+  margin-top: 0 !important;
+  float: left !important;
+  font-size: 14px;
+}
+
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_filter input {
+  font-size: 14px;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+  border-bottom: 1px solid #ffffff !important;
+}
+
+table.dataTable.no-footer {
+  border-bottom: none !important;
+}
