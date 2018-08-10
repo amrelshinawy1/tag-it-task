@@ -4,9 +4,11 @@ import { DataTablesModule } from 'angular-datatables';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppComponent } from './app.component';
 import { ApiService } from './services/apiService';
+import { imageUploadService } from './services/imageUploadService';
 import { itemService } from './services/itemService';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    MyDatePickerModule 
   ],
-  providers: [ApiService, itemService],
+  providers: [ApiService, itemService, imageUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

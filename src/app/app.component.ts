@@ -3,6 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { itemService } from './services/itemService';
 import { ApiService } from './services/apiService';
+import { imageUploadService } from './services/imageUploadService';
+import { IMyDpOptions } from 'mydatepicker';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,13 +19,20 @@ export class AppComponent implements OnInit {
   head
   body
   deletedItem
+  selectedFile: File = null;
   deletedItemIndex
   error_msgs
   createItem
   editItemForm
+  public myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy-mm-dd',
+    dayLabels: { su: 'الاحد', mo: 'الاتنين', tu: 'الثلاثاء', we: 'الاربعاء', th: 'الخميس', fr: 'الجمعه', sa: 'السبت' },
+    monthLabels: { 1: 'يناير', 2: 'فبراير', 3: 'مارس', 4: 'أبريل', 5: 'مايو', 6: 'يونيو', 7: 'يوليو', 8: 'أغسطس', 9: 'سبتمبر', 10: 'أكتوبر', 11: 'نوفمبر', 12: 'ديسمبر' }
+  };
   constructor(
     private itemService: itemService,
     private apiService: ApiService,
+    private imageUploadService: imageUploadService,
     private formbuilder: FormBuilder,
   ) {
   }
@@ -33,7 +43,7 @@ export class AppComponent implements OnInit {
       ItemName: ['', [<any>Validators.required]],
       Price: ['', [<any>Validators.required]],
       Photo: ['', [<any>Validators.required]],
-      ExpireDate: ['', [<any>Validators.required]],
+      ExpireDate: [null, [<any>Validators.required]],
     }
 
     this.createItem = this.formbuilder.group(form)
@@ -46,7 +56,7 @@ export class AppComponent implements OnInit {
         required: 'قم بادخال السعر ',
       },
       Photo: {
-        required: 'قم بادخال رابط الصوره '
+        required: 'قم بادخال الصوره '
       },
       ExpireDate: {
         required: 'قم بادخال تاريخ الانتهاء ',
@@ -76,7 +86,7 @@ export class AppComponent implements OnInit {
         required: 'قم بادخال السعر ',
       },
       Photo: {
-        required: 'قم بادخال رابط الصوره '
+        required: 'قم بادخال الصوره '
       },
       ExpireDate: {
         required: 'قم بادخال تاريخ الانتهاء ',
@@ -85,7 +95,18 @@ export class AppComponent implements OnInit {
     this.initErrorObj();
   }
 
-
+  uploadImage(event) {
+    this.selectedFile = event.target.files[0];
+    this.imageUploadService.post(this.selectedFile).subscribe(data => {
+      if (data.res.ok) {
+        this.createItem.controls['Photo'].setValue(`http://task.taj-it.com/UploadImage/${this.selectedFile.name}`);
+        this.editItemForm.controls['Photo'].setValue(`http://task.taj-it.com/UploadImage/${this.selectedFile.name}`);
+      }
+      console.log(data)
+    }, error => {
+      console.log(error);
+    });
+  }
 
   initErrorObj() {
     this.error = {
@@ -140,6 +161,7 @@ export class AppComponent implements OnInit {
         };
       return;
     }
+    body.ExpireDate = body.ExpireDate.formatted
     let result = await this.apiService.postItem('/Items', body).toPromise();
     if (result) {
       form.reset();
@@ -175,6 +197,8 @@ export class AppComponent implements OnInit {
         };
       return;
     }
+    console.log(body.ExpireDate)
+    body.ExpireDate = body.ExpireDate.formatted || body.ExpireDate
     let result = await this.apiService.updateItem(`/Items/${body.ItemId}`, body).toPromise();
     if (result.status == 204) {
       modal.hide();
@@ -203,5 +227,34 @@ export class AppComponent implements OnInit {
   ShowEditModal(modal, item) {
     this.editForm(item)
     modal.show();
+  }
+
+  setDate(): void {
+    // Set today date using the patchValue function
+    let date = new Date();
+    this.createItem.patchValue({
+      ExpireDate: {
+        date: {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate()
+        }
+      }
+    });
+    this.editItemForm.patchValue({
+      ExpireDate: {
+        date: {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate()
+        }
+      }
+    });
+  }
+
+  clearDate(): void {
+
+    this.editItemForm.patchValue({ ExpireDate: null });
+    this.createItem.patchValue({ ExpireDate: null });
   }
 }

@@ -25,6 +25,7 @@
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
     "jquery": "^3.3.1",
+    "mydatepicker": "^2.6.4",
     "ngx-bootstrap": "^3.0.1",
     "rxjs": "^6.2.2",
     "zone.js": "^0.8.26"
